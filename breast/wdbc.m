@@ -7,7 +7,7 @@
 %% Initialization
 clear ; close all; randn('seed',0); 
 %% ==================== Part 1: Loading Data from test.data ===================	
-data=load('test.data');
+data=load('wdbc.data');
 X_data=data(:,3:end);	
 y_data=data(:,2);
 m_features=30;
@@ -133,15 +133,5 @@ y_bayesian=bayes_classifier(m_hat,S_hat,P,X_test);
 
 err_bayesian = (1-length(find(y_test==y_bayesian))/length(y_test));
 fprintf('After LDA Bayesian classifier error is %.3f%% \n',err_bayesian*100);
-
-%% ==================== Part 10: Classification using perceptron 	===========
-
-
-X=[X_data'; ones(1,N)];
-y=y_data';
-y(find(y==2))=-1; % -1 for class two
-rho=0.1;
-w_ini=ones(1,m_features+1)';
-[w, iter, mis_clas] = perce(X, y, w_ini, rho);
 
 %% ============================================================================
